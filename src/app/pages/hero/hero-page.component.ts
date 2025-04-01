@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 
 
 @Component({
@@ -9,9 +9,14 @@ export class HeroPageComponent {
   name = signal('Ironman'); // Hero name señal
   age = signal(45); // Hero age señal
 
-  getHeroDescription() {
-    return `${this.name()} - ${this.age()}`;
-  }
+  heroDescription = computed(() => {
+    const description = `${this.name()} - ${this.age()}`;
+    return description;
+  }) // Hero description señal computada
+
+  // getHeroDescription() {
+  //   return `${this.name()} - ${this.age()}`;
+  // }
 
   changeHero() {
     this.name.set('Spiderman');
@@ -20,6 +25,7 @@ export class HeroPageComponent {
 
   changeAge() {
     this.age.set(50);
+
   }
 
   resetForm() {
